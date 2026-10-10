@@ -269,12 +269,12 @@ function ListaTab({ evento, inscricoes, tipo }: { evento: Evento; inscricoes: In
   function exportar() {
     const header = tipo === 'associada'
       ? ['Associada', 'Nível', 'Responsável', 'E-mail', 'Confirmação', 'Adultos', 'Crianças ≤5', 'Valor', 'Pagamento', 'Inscrito em']
-      : ['Convidada', 'Convidada por', 'E-mail', 'Telefone', 'Adultos', 'Crianças ≤5', 'Inscrito em'];
+      : ['Nome', 'E-mail', 'Adultos', 'Crianças ≤5', 'Inscrito em'];
     const linhas = [
       header,
       ...inscricoes.map(i => tipo === 'associada'
         ? [i.nome_associada, i.nivel ?? '', i.nome_responsavel, i.email, i.confirmacao === 'sim' ? 'Confirmado' : 'Não vai', String(i.adultos), String(i.criancas), `R$ ${Number(i.valor_total).toFixed(2)}`, i.pagamento_status, new Date(i.created_at).toLocaleString('pt-BR')]
-        : [i.nome_responsavel, i.convidada_por ?? '', i.email, '', String(i.adultos), String(i.criancas), new Date(i.created_at).toLocaleString('pt-BR')]
+        : [i.nome_responsavel, i.email, String(i.adultos), String(i.criancas), new Date(i.created_at).toLocaleString('pt-BR')]
       )
     ];
     const csv = linhas.map(l => l.map(c => `"${String(c).replace(/"/g, '""')}"`).join(',')).join('\n');
@@ -346,7 +346,7 @@ function ListaTab({ evento, inscricoes, tipo }: { evento: Evento; inscricoes: In
                   <p className="font-dm text-xs text-texto-secundario">
                     {tipo === 'associada'
                       ? <>Resp.: {i.nome_responsavel} · {i.email}</>
-                      : <>{i.email} · convidada por <b>{i.convidada_por}</b></>
+                      : <>{i.email}</>
                     }
                   </p>
                   {i.confirmacao === 'sim' && (i.adultos > 0 || i.criancas > 0) && (

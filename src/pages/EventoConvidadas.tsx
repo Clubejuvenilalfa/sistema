@@ -17,7 +17,6 @@ export default function EventoConvidadas() {
   const [nomeConvidado, setNomeConvidado] = useState('');
   const [email, setEmail] = useState('');
   const [telefone, setTelefone] = useState('');
-  const [convidadaPor, setConvidadaPor] = useState('');
   const [adultos, setAdultos] = useState(1);
   const [criancas, setCriancas] = useState(0);
   const [enviando, setEnviando] = useState(false);
@@ -43,7 +42,7 @@ export default function EventoConvidadas() {
       _telefone: telefone,
       _adultos: adultos,
       _criancas: criancas,
-      _convidada_por: convidadaPor,
+      _convidada_por: '',
     });
     setEnviando(false);
     if (error) { toast.error(error.message); return; }
@@ -132,13 +131,6 @@ export default function EventoConvidadas() {
           </div>
         </div>
 
-        <div className="bg-verde/5 border border-verde/20 rounded-2xl p-5 mb-5">
-          <h3 className="font-playfair text-lg text-texto-principal mb-2">💗 Você é nossa convidada</h3>
-          <p className="font-dm text-sm text-texto-secundario">
-            Convidadas participam gratuitamente — <b>não há taxa</b>. Só precisamos saber quantas pessoas vão pra organizar o espaço.
-          </p>
-        </div>
-
         <form onSubmit={submit} className="bg-white rounded-2xl border border-roxo/10 p-5 space-y-4">
           <Field label="Seu nome completo *">
             <input required value={nomeConvidado} onChange={e => setNomeConvidado(e.target.value)} className="input" />
@@ -148,9 +140,6 @@ export default function EventoConvidadas() {
           </Field>
           <Field label="WhatsApp com DDD *">
             <input required value={telefone} onChange={e => setTelefone(e.target.value)} placeholder="(00) 00000-0000" className="input" />
-          </Field>
-          <Field label="Nome da associada que convidou você *">
-            <input required value={convidadaPor} onChange={e => setConvidadaPor(e.target.value)} className="input" />
           </Field>
 
           <div className="pt-2 border-t border-roxo/10">
