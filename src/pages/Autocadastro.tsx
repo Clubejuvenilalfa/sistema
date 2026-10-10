@@ -19,13 +19,13 @@ export default function Autocadastro() {
   async function submit(e: FormEvent) {
     e.preventDefault();
     setSending(true);
-    const { error } = await supabase.from('inscricoes_pendentes').insert({
-      nome_menina: form.nome_menina.trim(),
-      data_nasc_menina: form.data_nasc_menina || null,
-      nome_responsavel: form.nome_responsavel.trim(),
-      telefone: form.telefone.trim(),
-      email: form.email.trim() || null,
-      observacoes: form.observacoes.trim() || null,
+    const { error } = await supabase.rpc('criar_inscricao', {
+      _nome_menina: form.nome_menina,
+      _data_nasc_menina: form.data_nasc_menina || null,
+      _nome_responsavel: form.nome_responsavel,
+      _telefone: form.telefone,
+      _email: form.email,
+      _observacoes: form.observacoes,
     });
     setSending(false);
     if (error) {
