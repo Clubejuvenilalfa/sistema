@@ -369,6 +369,15 @@ function WhatsIcon() {
   );
 }
 
+function Field({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div>
+      <label className="font-dm text-sm font-medium text-texto-principal mb-1.5 block">{label}</label>
+      {children}
+    </div>
+  );
+}
+
 function Info({ icon: Icon, label, value }: { icon: React.ComponentType<{ className?: string }>; label: string; value: string }) {
   return (
     <div>

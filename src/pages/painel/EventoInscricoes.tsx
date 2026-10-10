@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Loader2, ArrowLeft, Download, Check, Clock, X, Trash2, Users } from 'lucide-react';
+import { Loader2, ArrowLeft, Download, Check, Clock, Trash2, Users } from 'lucide-react';
 import { toast } from 'sonner';
 import { supabase } from '@/lib/supabase';
 import type { Evento, InscricaoEvento } from '@/types/db';
