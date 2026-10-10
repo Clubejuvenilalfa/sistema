@@ -132,6 +132,7 @@ export type Evento = {
   descricao: string | null;
   data_evento: string | null;
   hora_evento: string | null;
+  hora_encerramento: string | null;
   local: string | null;
   imagem_capa_url: string | null;
   valor_por_pessoa: number;
@@ -143,6 +144,8 @@ export type Evento = {
   pix_banco: string | null;
   texto_reembolso: string | null;
   pedido_colaboracao: string | null;
+  aviso_familiar: string | null;
+  aviso_vestimenta: string | null;
   whatsapp_grupo: string | null;
   whatsapp_responsavel_financeiro: string | null;
   nome_responsavel_financeiro: string | null;

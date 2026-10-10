@@ -161,8 +161,9 @@ function ConfigTab({ evento }: { evento: Evento }) {
 
       <Section titulo="Quando e onde">
         <Grid>
-          <Field label="Data" col={1}><input type="date" value={state.data_evento ?? ''} onChange={ev => set('data_evento', ev.target.value)} className="input" /></Field>
-          <Field label="Hora" col={1}><input type="time" value={state.hora_evento ?? ''} onChange={ev => set('hora_evento', ev.target.value)} className="input" /></Field>
+          <Field label="Data" col={2}><input type="date" value={state.data_evento ?? ''} onChange={ev => set('data_evento', ev.target.value)} className="input" /></Field>
+          <Field label="Hora de chegada" col={1}><input type="time" value={state.hora_evento ?? ''} onChange={ev => set('hora_evento', ev.target.value)} className="input" /></Field>
+          <Field label="Hora de encerramento" col={1}><input type="time" value={state.hora_encerramento ?? ''} onChange={ev => set('hora_encerramento', ev.target.value)} className="input" /></Field>
           <Field label="Local" col={2}><input value={state.local ?? ''} onChange={ev => set('local', ev.target.value)} className="input" /></Field>
           <Field label="URL da imagem de capa" col={2}>
             <input value={state.imagem_capa_url ?? ''} onChange={ev => set('imagem_capa_url', ev.target.value)}
@@ -196,13 +197,19 @@ function ConfigTab({ evento }: { evento: Evento }) {
         </Grid>
       </Section>
 
-      <Section titulo="Textos">
+      <Section titulo="Textos e avisos">
         <Grid>
-          <Field label="Texto de reembolso" col={2}>
-            <textarea rows={2} value={state.texto_reembolso ?? ''} onChange={ev => set('texto_reembolso', ev.target.value)} className="input resize-none" />
+          <Field label="Aviso de vestimenta (bloco colorido no topo do passo 2)" col={2}>
+            <textarea rows={2} value={state.aviso_vestimenta ?? ''} onChange={ev => set('aviso_vestimenta', ev.target.value)} className="input resize-none" />
           </Field>
           <Field label="Pedido de colaboração" col={2}>
             <textarea rows={2} value={state.pedido_colaboracao ?? ''} onChange={ev => set('pedido_colaboracao', ev.target.value)} className="input resize-none" />
+          </Field>
+          <Field label="Aviso núcleo familiar (checkbox de aceite obrigatório)" col={2}>
+            <textarea rows={2} value={state.aviso_familiar ?? ''} onChange={ev => set('aviso_familiar', ev.target.value)} className="input resize-none" />
+          </Field>
+          <Field label="Texto de reembolso" col={2}>
+            <textarea rows={2} value={state.texto_reembolso ?? ''} onChange={ev => set('texto_reembolso', ev.target.value)} className="input resize-none" />
           </Field>
         </Grid>
       </Section>

@@ -68,6 +68,7 @@ function EventoFluxo({ evento }: { evento: Evento }) {
   const [adultos, setAdultos] = useState(1);
   const [criancas, setCriancas] = useState(0);
   const [aceiteTermos, setAceiteTermos] = useState(false);
+  const [aceiteFamiliar, setAceiteFamiliar] = useState(false);
   const [enviando, setEnviando] = useState(false);
   const [pixCopiado, setPixCopiado] = useState(false);
 
@@ -110,6 +111,10 @@ function EventoFluxo({ evento }: { evento: Evento }) {
 
   async function enviar(e: FormEvent) {
     e.preventDefault();
+    if (!aceiteFamiliar) {
+      toast.error('Você precisa confirmar que o convite é para o núcleo familiar.');
+      return;
+    }
     if (!aceiteTermos) {
       toast.error('Você precisa confirmar o aceite dos termos.');
       return;
@@ -161,7 +166,11 @@ function EventoFluxo({ evento }: { evento: Evento }) {
         <div className="bg-white rounded-2xl shadow-xl shadow-roxo/10 p-5 mb-5">
           <div className="grid grid-cols-3 gap-3 text-center">
             <Info icon={Calendar} label="Data" value={dataFmt || '—'} />
-            <Info icon={Clock} label="Horário" value={evento.hora_evento?.slice(0, 5) || '—'} />
+            <Info icon={Clock} label="Horário" value={
+              evento.hora_evento && evento.hora_encerramento
+                ? `${evento.hora_evento.slice(0, 5)} às ${evento.hora_encerramento.slice(0, 5)}`
+                : evento.hora_evento?.slice(0, 5) || '—'
+            } />
             <Info icon={MapPin} label="Local" value={evento.local || '—'} />
           </div>
         </div>
@@ -264,6 +273,14 @@ function EventoFluxo({ evento }: { evento: Evento }) {
               </div>
             )}
 
+            {evento.aviso_vestimenta && (
+              <div className="rounded-2xl p-5 text-white"
+                style={{ background: 'linear-gradient(135deg, #7B2FBE 0%, #D5006D 100%)' }}>
+                <h3 className="font-playfair text-lg mb-2">✨ Vestimenta</h3>
+                <p className="font-dm text-sm whitespace-pre-wrap">{evento.aviso_vestimenta}</p>
+              </div>
+            )}
+
             {evento.pedido_colaboracao && (
               <div className="bg-verde/5 border border-verde/20 rounded-2xl p-5">
                 <h3 className="font-playfair text-lg text-texto-principal mb-2">🍽️ Colaboração</h3>
@@ -271,9 +288,9 @@ function EventoFluxo({ evento }: { evento: Evento }) {
               </div>
             )}
 
-            <div className="bg-rosa/5 border border-rosa/20 rounded-2xl p-5">
+            <div className="bg-rosa/5 border border-rosa/20 rounded-2xl p-5 space-y-4">
               {evento.texto_reembolso && (
-                <div className="flex items-start gap-3 mb-4">
+                <div className="flex items-start gap-3">
                   <AlertTriangle className="w-5 h-5 text-rosa shrink-0 mt-0.5" />
                   <div>
                     <p className="font-dm text-sm font-medium text-texto-principal mb-1">Importante — sem reembolso</p>
@@ -282,7 +299,15 @@ function EventoFluxo({ evento }: { evento: Evento }) {
                 </div>
               )}
 
-              <label className="flex items-start gap-3 cursor-pointer">
+              {evento.aviso_familiar && (
+                <label className="flex items-start gap-3 cursor-pointer pt-3 border-t border-rosa/15">
+                  <input type="checkbox" checked={aceiteFamiliar} onChange={e => setAceiteFamiliar(e.target.checked)}
+                    className="w-5 h-5 rounded accent-rosa mt-0.5 shrink-0" />
+                  <span className="font-dm text-sm text-texto-principal">{evento.aviso_familiar}</span>
+                </label>
+              )}
+
+              <label className="flex items-start gap-3 cursor-pointer pt-3 border-t border-rosa/15">
                 <input type="checkbox" checked={aceiteTermos} onChange={e => setAceiteTermos(e.target.checked)}
                   className="w-5 h-5 rounded accent-rosa mt-0.5 shrink-0" />
                 <span className="font-dm text-sm text-texto-principal">
@@ -296,7 +321,7 @@ function EventoFluxo({ evento }: { evento: Evento }) {
                 className="px-5 py-3 rounded-full bg-white border border-roxo/20 text-texto-secundario font-dm text-sm font-medium hover:bg-roxo-light transition-all">
                 ← voltar
               </button>
-              <button type="submit" disabled={enviando || !aceiteTermos}
+              <button type="submit" disabled={enviando || !aceiteTermos || !aceiteFamiliar}
                 className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-roxo text-white font-dm text-sm font-medium hover:bg-roxo-dark transition-all disabled:opacity-40">
                 {enviando ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Confirmar inscrição'}
               </button>
