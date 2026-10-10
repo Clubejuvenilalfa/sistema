@@ -124,6 +124,51 @@ export type RespostaFormulario = {
   created_at: string;
 };
 
+export type Evento = {
+  id: string;
+  slug: string;
+  nome: string;
+  subtitulo: string | null;
+  descricao: string | null;
+  data_evento: string | null;
+  hora_evento: string | null;
+  local: string | null;
+  imagem_capa_url: string | null;
+  valor_por_pessoa: number;
+  idade_isenta: number;
+  vencimento_pagamento: string | null;
+  pix_chave: string | null;
+  pix_tipo: string | null;
+  pix_titular: string | null;
+  pix_banco: string | null;
+  texto_reembolso: string | null;
+  pedido_colaboracao: string | null;
+  whatsapp_grupo: string | null;
+  whatsapp_responsavel_financeiro: string | null;
+  nome_responsavel_financeiro: string | null;
+  niveis: string[];
+  status: 'ativo' | 'encerrado';
+  created_at: string;
+  updated_at: string;
+};
+
+export type InscricaoEvento = {
+  id: string;
+  evento_id: string;
+  email: string;
+  nome_associada: string;
+  nivel: string | null;
+  nome_responsavel: string;
+  confirmacao: 'sim' | 'nao';
+  adultos: number;
+  criancas: number;
+  valor_total: number;
+  pagamento_status: 'pendente' | 'pago' | 'isento';
+  pagamento_data: string | null;
+  pagamento_observacao: string | null;
+  created_at: string;
+};
+
 export type InscricaoPendente = {
   id: string;
   nome_menina: string;
