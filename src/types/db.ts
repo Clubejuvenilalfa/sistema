@@ -93,3 +93,14 @@ export type AnotacaoCalendario = {
   created_by: string | null;
   created_at: string;
 };
+
+export type InscricaoPendente = {
+  id: string;
+  nome_menina: string;
+  data_nasc_menina: string | null;
+  nome_responsavel: string;
+  telefone: string;
+  email: string | null;
+  observacoes: string | null;
+  created_at: string;
+};

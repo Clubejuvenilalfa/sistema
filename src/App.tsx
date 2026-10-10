@@ -9,6 +9,7 @@ import AppLayout from '@/components/layout/AppLayout';
 import Dashboard from '@/pages/painel/Dashboard';
 import Meninas from '@/pages/painel/Meninas';
 import Familias from '@/pages/painel/Familias';
+import ListaEspera from '@/pages/painel/ListaEspera';
 import Reunioes from '@/pages/painel/Reunioes';
 import Presenca from '@/pages/painel/Presenca';
 import Calendario from '@/pages/painel/Calendario';
@@ -38,6 +39,7 @@ export default function App() {
             }
           >
             <Route index element={<Dashboard />} />
+            <Route path="lista-espera" element={<ListaEspera />} />
             <Route path="meninas" element={<Meninas />} />
             <Route path="familias" element={<Familias />} />
             <Route path="presenca" element={<Presenca />} />
