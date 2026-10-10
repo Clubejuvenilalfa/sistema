@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body, #root {
+    min-height: 100vh;
+  }
+  body {
+    @apply bg-roxo-light/20 text-texto-principal font-dm antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-playfair;
+  }
+}
