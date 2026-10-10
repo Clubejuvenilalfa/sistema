@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Loader2, Plus, X, ExternalLink, Pencil, Users, Calendar } from 'lucide-react';
+import { Loader2, Plus, X, ExternalLink, Pencil, Calendar } from 'lucide-react';
 import { toast } from 'sonner';
 import { Link } from 'react-router-dom';
 import { supabase } from '@/lib/supabase';
@@ -92,13 +92,9 @@ export default function Eventos() {
                     className="p-2 rounded-full hover:bg-roxo/10 text-roxo transition-all">
                     <ExternalLink className="w-3.5 h-3.5" />
                   </a>
-                  <Link to={`/painel/eventos/${e.id}`} title="Editar"
-                    className="p-2 rounded-full hover:bg-roxo/10 text-roxo transition-all">
-                    <Pencil className="w-3.5 h-3.5" />
-                  </Link>
-                  <Link to={`/painel/eventos/${e.id}/inscricoes`} title="Ver inscrições"
+                  <Link to={`/painel/eventos/${e.id}`}
                     className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-roxo text-white text-xs font-dm font-medium hover:bg-roxo-dark transition-all">
-                    <Users className="w-3.5 h-3.5" /> Inscrições
+                    <Pencil className="w-3.5 h-3.5" /> Abrir
                   </Link>
                 </div>
               </div>

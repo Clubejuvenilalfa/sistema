@@ -166,6 +166,8 @@ export type InscricaoEvento = {
   pagamento_status: 'pendente' | 'pago' | 'isento';
   pagamento_data: string | null;
   pagamento_observacao: string | null;
+  tipo: 'associada' | 'convidada';
+  convidada_por: string | null;
   created_at: string;
 };
 

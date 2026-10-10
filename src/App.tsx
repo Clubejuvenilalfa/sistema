@@ -14,9 +14,9 @@ import Formularios from '@/pages/painel/Formularios';
 import FormularioDetalhe from '@/pages/painel/FormularioDetalhe';
 import FormularioPublico from '@/pages/FormularioPublico';
 import EventoPublico from '@/pages/EventoPublico';
+import EventoConvidadas from '@/pages/EventoConvidadas';
 import Eventos from '@/pages/painel/Eventos';
-import EventoConfig from '@/pages/painel/EventoConfig';
-import EventoInscricoes from '@/pages/painel/EventoInscricoes';
+import EventoDetalhe from '@/pages/painel/EventoDetalhe';
 import Reunioes from '@/pages/painel/Reunioes';
 import Presenca from '@/pages/painel/Presenca';
 import Calendario from '@/pages/painel/Calendario';
@@ -38,6 +38,7 @@ export default function App() {
           <Route path="/autocadastro" element={<Autocadastro />} />
           <Route path="/f/:slug" element={<FormularioPublico />} />
           <Route path="/eventos/:slug" element={<EventoPublico />} />
+          <Route path="/eventos/:slug/convidadas" element={<EventoConvidadas />} />
 
           <Route
             path="/painel"
@@ -57,8 +58,7 @@ export default function App() {
             <Route path="formularios" element={<Formularios />} />
             <Route path="formularios/:id" element={<FormularioDetalhe />} />
             <Route path="eventos" element={<Eventos />} />
-            <Route path="eventos/:id" element={<EventoConfig />} />
-            <Route path="eventos/:id/inscricoes" element={<EventoInscricoes />} />
+            <Route path="eventos/:id" element={<EventoDetalhe />} />
             <Route path="marketing" element={<Marketing />} />
             <Route
               path="admin"
