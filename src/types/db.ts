@@ -94,6 +94,36 @@ export type AnotacaoCalendario = {
   created_at: string;
 };
 
+export type TipoCampo = 'texto' | 'texto-longo' | 'email' | 'telefone' | 'data' | 'select' | 'checkbox' | 'sim-nao';
+
+export type CampoFormulario = {
+  id: string;
+  tipo: TipoCampo;
+  label: string;
+  obrigatorio: boolean;
+  placeholder?: string;
+  opcoes?: string[]; // só para select e checkbox
+};
+
+export type Formulario = {
+  id: string;
+  slug: string;
+  nome: string;
+  descricao: string | null;
+  campos: CampoFormulario[];
+  status: 'ativo' | 'encerrado';
+  created_by: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
+export type RespostaFormulario = {
+  id: string;
+  formulario_id: string;
+  dados: Record<string, string | string[] | boolean>;
+  created_at: string;
+};
+
 export type InscricaoPendente = {
   id: string;
   nome_menina: string;

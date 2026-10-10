@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, Users, Heart, ClipboardCheck, Calendar, ClipboardList, Megaphone, LogOut, UserCog, Inbox } from 'lucide-react';
+import { LayoutDashboard, Users, Heart, ClipboardCheck, Calendar, ClipboardList, Megaphone, LogOut, UserCog, Inbox, FileText } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { cn } from '@/lib/utils';
 import type { Cargo } from '@/types/db';
@@ -19,6 +19,7 @@ const items: NavItem[] = [
   { to: '/painel/presenca', label: 'Presença', icon: ClipboardCheck },
   { to: '/painel/calendario', label: 'Calendário', icon: Calendar },
   { to: '/painel/reunioes', label: 'Reuniões', icon: ClipboardList },
+  { to: '/painel/formularios', label: 'Formulários', icon: FileText },
   { to: '/painel/marketing', label: 'Marketing', icon: Megaphone, cargos: ['diretora', 'preceptora'] },
   { to: '/painel/admin', label: 'Equipe', icon: UserCog, cargos: ['diretora'] },
 ];
