@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import type { Session, User } from '@supabase/supabase-js';
+import type { Session } from '@supabase/supabase-js';
 import { supabase } from '@/lib/supabase';
 import type { Profile } from '@/types/db';
 
@@ -11,13 +11,28 @@ export function useAuth() {
   useEffect(() => {
     let active = true;
 
-    supabase.auth.getSession().then(({ data }) => {
+    async function hydrate(s: Session | null) {
       if (!active) return;
-      setSession(data.session);
-    });
+      setSession(s);
+      if (!s?.user) {
+        setProfile(null);
+        setLoading(false);
+        return;
+      }
+      const { data } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', s.user.id)
+        .maybeSingle();
+      if (!active) return;
+      setProfile((data as Profile) ?? null);
+      setLoading(false);
+    }
+
+    supabase.auth.getSession().then(({ data }) => hydrate(data.session));
 
     const { data: sub } = supabase.auth.onAuthStateChange((_, s) => {
-      setSession(s);
+      hydrate(s);
     });
 
     return () => {
@@ -25,32 +40,6 @@ export function useAuth() {
       sub.subscription.unsubscribe();
     };
   }, []);
-
-  useEffect(() => {
-    const user: User | undefined = session?.user;
-    if (!user) {
-      setProfile(null);
-      setLoading(false);
-      return;
-    }
-
-    let active = true;
-    setLoading(true);
-    supabase
-      .from('profiles')
-      .select('*')
-      .eq('id', user.id)
-      .maybeSingle()
-      .then(({ data }) => {
-        if (!active) return;
-        setProfile((data as Profile) ?? null);
-        setLoading(false);
-      });
-
-    return () => {
-      active = false;
-    };
-  }, [session?.user?.id]);
 
   return {
     session,
