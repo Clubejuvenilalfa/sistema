@@ -13,6 +13,7 @@ import ListaEspera from '@/pages/painel/ListaEspera';
 import Formularios from '@/pages/painel/Formularios';
 import FormularioDetalhe from '@/pages/painel/FormularioDetalhe';
 import FormularioPublico from '@/pages/FormularioPublico';
+import EventoAlfaStars from '@/pages/EventoAlfaStars';
 import Reunioes from '@/pages/painel/Reunioes';
 import Presenca from '@/pages/painel/Presenca';
 import Calendario from '@/pages/painel/Calendario';
@@ -33,6 +34,7 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/autocadastro" element={<Autocadastro />} />
           <Route path="/f/:slug" element={<FormularioPublico />} />
+          <Route path="/eventos/alfa-stars-2025" element={<EventoAlfaStars />} />
 
           <Route
             path="/painel"
