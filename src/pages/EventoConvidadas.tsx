@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react';
+import { useState, useEffect, type FormEvent } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Loader2, CheckCircle2, Calendar, Clock, MapPin, AlertTriangle, Users, Heart } from 'lucide-react';
@@ -21,6 +21,12 @@ export default function EventoConvidadas() {
   const [criancas, setCriancas] = useState(0);
   const [enviando, setEnviando] = useState(false);
   const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    if (done) {
+      try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch { window.scrollTo(0, 0); }
+    }
+  }, [done]);
 
   const q = useQuery({
     queryKey: ['evento_publico', slug],

@@ -1,4 +1,4 @@
-import { useState, useMemo, type FormEvent } from 'react';
+import { useState, useMemo, useEffect, type FormEvent } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Loader2, CheckCircle2, Calendar, Clock, MapPin, Copy, Check, AlertTriangle, Users, Heart } from 'lucide-react';
@@ -71,6 +71,11 @@ function EventoFluxo({ evento }: { evento: Evento }) {
   const [aceiteFamiliar, setAceiteFamiliar] = useState(false);
   const [enviando, setEnviando] = useState(false);
   const [pixCopiado, setPixCopiado] = useState(false);
+
+  // rola pro topo sempre que mudar de passo (evita a pessoa achar que não funcionou)
+  useEffect(() => {
+    try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch { window.scrollTo(0, 0); }
+  }, [step]);
 
   const valorTotal = useMemo(() => adultos * (evento.valor_por_pessoa ?? 0), [adultos, evento.valor_por_pessoa]);
   const vencimentoFmt = formatarData(evento.vencimento_pagamento);
@@ -321,7 +326,7 @@ function EventoFluxo({ evento }: { evento: Evento }) {
                 className="px-5 py-3 rounded-full bg-white border border-roxo/20 text-texto-secundario font-dm text-sm font-medium hover:bg-roxo-light transition-all">
                 ← voltar
               </button>
-              <button type="submit" disabled={enviando || !aceiteTermos || !aceiteFamiliar}
+              <button type="submit" disabled={enviando}
                 className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-roxo text-white font-dm text-sm font-medium hover:bg-roxo-dark transition-all disabled:opacity-40">
                 {enviando ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Confirmar inscrição'}
               </button>
