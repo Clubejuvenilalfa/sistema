@@ -65,7 +65,7 @@ function EventoFluxo({ evento }: { evento: Evento }) {
   const [nivel, setNivel] = useState('');
   const [nomeResponsavel, setNomeResponsavel] = useState('');
   const [confirmacao, setConfirmacao] = useState<'sim' | 'nao' | ''>('');
-  const [adultos, setAdultos] = useState(1);
+  const [adultos, setAdultos] = useState(0);
   const [criancas, setCriancas] = useState(0);
   const [aceiteTermos, setAceiteTermos] = useState(false);
   const [aceiteFamiliar, setAceiteFamiliar] = useState(false);
@@ -116,6 +116,10 @@ function EventoFluxo({ evento }: { evento: Evento }) {
 
   async function enviar(e: FormEvent) {
     e.preventDefault();
+    if (adultos < 1) {
+      toast.error('Informe quantas pessoas vão (pelo menos 1 adulto).');
+      return;
+    }
     if (!aceiteFamiliar) {
       toast.error('Você precisa confirmar que o convite é para o núcleo familiar.');
       return;
@@ -235,7 +239,12 @@ function EventoFluxo({ evento }: { evento: Evento }) {
                 Crianças de até {evento.idade_isenta} anos <b>não pagam</b>.
               </p>
 
-              <Contador label="Adultos (incluindo a associada e maiores de 5 anos)" icon={Users} value={adultos} onChange={setAdultos} min={1} />
+              <Contador label="Adultos (incluindo a associada e maiores de 5 anos)" icon={Users} value={adultos} onChange={setAdultos} min={0} />
+              {adultos < 1 && (
+                <p className="mt-2 font-dm text-xs text-rosa flex items-center gap-1.5">
+                  <AlertTriangle className="w-3 h-3" /> Clique no <b>+</b> para informar quantos adultos vão. (Pelo menos 1 associada deve participar.)
+                </p>
+              )}
               <div className="h-3" />
               <Contador label={`Crianças com até ${evento.idade_isenta} anos (não pagam)`} icon={Heart} value={criancas} onChange={setCriancas} min={0} />
 
